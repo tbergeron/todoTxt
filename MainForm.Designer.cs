@@ -275,7 +275,7 @@
 			this.Controls.Add(this.editor);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
-			this.Text = "todo.txt";
+			this.Text = "todoTxt";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
