@@ -6,8 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-// TODO : BUG : Fuck d'encoding des accents
-
 namespace todoTxt
 {
 	public partial class MainForm : Form
@@ -128,7 +126,6 @@ namespace todoTxt
 					}
 
 					// Priority
-					// TODO : BUG : Problème si on écrit quelque chose dans les parenthèses.
 					else if ((highlightableString.ToString().Contains("(")) && (highlightableString.ToString().Contains(")")))
 					{
 						editor.SelectionLength = editor.SelectionLength;
