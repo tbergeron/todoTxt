@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScintillaNET>
+
+	<Language Name="lua">
+		<Indentation TabWidth="2" UseTabs="false" />
+
+		<Lexer LexerName="lua" LineCommentPrefix="//">
+			<Keywords List="0">x</Keywords>
+		</Lexer>
+
+		<Styles>
+			<Style Name="DEFAULT"	FontName="Consolas" Size="10" />
+			<Style Name="NUMBER" ForeColor="Blue" />
+
+			<!--Comments style ?!-->
+			<Style Name="CHARACTER" ForeColor="Black" BackColor="Red" /> 
+
+			<!--Keywords-->
+			<Style Name="WORD" ForeColor="Red" Bold="Yes" />
+			<Style Name="WORD2" ForeColor="Green" Bold="Yes" />
+			<Style Name="WORD3" ForeColor="Blue" Bold="Yes" />
+		</Styles>
+	</Language>
+
+</ScintillaNET>

@@ -45,6 +45,24 @@ namespace todoTxt
 		{
 			todoTxtPath = Properties.Settings.Default.todoTxtRecentPath;
 
+			// Line numbers
+			editor.Margins[0].Width = 20;
+
+			// Highlight Current Line
+			editor.Caret.HighlightCurrentLine = true;
+
+
+			// Custom Scintilla configuration
+			try
+			{
+				editor.ConfigurationManager.CustomLocation = "ScintillaNET.xml";
+				editor.ConfigurationManager.Language = "lua";
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.InnerException.ToString());
+			}
+
 			if (File.Exists(todoTxtPath))
 			{
 				OpenTodoTxt();
@@ -52,9 +70,41 @@ namespace todoTxt
 
 		}
 
-		private void editor_KeyUp(object sender, KeyEventArgs e)
+		private void editor_CharAdded(object sender, ScintillaNet.CharAddedEventArgs e)
 		{
-			HighlightLine(editor.GetLineFromCharIndex(editor.SelectionStart));
+			// Dynamic keywords
+			//if (e.Ch == ':')
+			//{
+			//    string wp = string.Empty;
+			//    Regex r = new Regex(@"\b\w+[:\b]");
+			//    MatchCollection m = r.Matches(editor.Text);
+			//    for (int i = 0; i < m.Count; i++)
+			//    {
+			//        wp += " " + m[i].Value.Substring(0, m[i].Value.Length - 1);
+			//    }
+			//    editor.Lexing.Keywords[2] = wp;
+			//}
+
+			//if (e.Ch == '@')
+			//{
+			//    string keywords = string.Empty;
+			//    string match = string.Empty;
+
+			//    Regex regex = new Regex(@"@\w*");
+			//    MatchCollection matches = regex.Matches(editor.Text);
+
+			//    for (int i = 0; i < matches.Count; i++)
+			//    {
+			//        match = matches[i].Value.ToLower().Replace("@", "");
+
+			//        if (!keywords.Contains(match))
+			//        {
+			//            keywords += match + " ";
+			//        }
+			//    }
+
+			//    editor.Lexing.Keywords[2] = keywords.TrimEnd();
+			//}
 		}
 
 		private void openButton_Click(object sender, EventArgs e)
@@ -71,112 +121,17 @@ namespace todoTxt
 
 		private void saveButton_Click(object sender, EventArgs e)
 		{
-			editor.SaveFile(todoTxtPath, RichTextBoxStreamType.PlainText);
+			//editor.SaveFile(todoTxtPath, RichTextBoxStreamType.PlainText);
 		}
 
 		
 		// Methods
 		public void OpenTodoTxt()
 		{
-			editor.Clear();
-
 			todoContent = File.ReadAllText(todoTxtPath, UTF8Encoding.UTF8);
 			editor.Text = todoContent;
 
-			HighlightLines();
-
-			editor.Select(editor.TextLength, 0);
-		}
-
-		public void HighlightLines()
-		{
-			int currentLineIndex = 0;
-			int totalLines = editor.Lines.Count() -1;
-
-			while (currentLineIndex <= totalLines)
-			{
-				HighlightLine(currentLineIndex);
-
-				currentLineIndex++;
-			}
-		}
-
-		public void HighlightLine(int lineIndex)
-		{
-			int selectionPosition = editor.SelectionStart;
-
-			foreach (Match highlightableString in highlightableStrings.Matches(editor.Lines[lineIndex]))
-			{
-				try
-				{
-					int highlightableStringIndex = editor.GetFirstCharIndexFromLine(lineIndex) + highlightableString.Index;
-
-					editor.Select(highlightableStringIndex, highlightableString.Length);
-
-					// Done task
-					if ((highlightableString.ToString().Contains("x")) && (highlightableString.Length < 4))
-					{
-						// Selecting the WHOLE line.
-						int selectedLineIndex = editor.GetLineFromCharIndex(highlightableStringIndex);
-						int lineLength = editor.Lines[selectedLineIndex].Length + 1;
-						editor.Select(highlightableStringIndex, lineLength);
-
-						// Striking out the whole line.
-						editor.SelectionFont = new Font(editor.SelectionFont, FontStyle.Strikeout);
-					}
-
-					// Priority
-					else if ((highlightableString.ToString().Contains("(")) && (highlightableString.ToString().Contains(")")))
-					{
-						editor.SelectionLength = editor.SelectionLength;
-
-						if (highlightableString.ToString().Contains("A"))
-						{
-							editor.SelectionColor = priorityATextColor;
-						}
-						else if (highlightableString.ToString().Contains("B"))
-						{
-							editor.SelectionColor = priorityBTextColor;
-						}
-						else if (highlightableString.ToString().Contains("C"))
-						{
-							editor.SelectionColor = priorityCTextColor;
-						}
-						else if (highlightableString.ToString().Contains("D"))
-						{
-							editor.SelectionColor = priorityDTextColor;
-						}
-						else if (highlightableString.ToString().Contains("E"))
-						{
-							editor.SelectionColor = priorityETextColor;
-						}
-
-						editor.SelectionBackColor = priorityBackColor;
-					}
-
-					// Context reference
-					else if (highlightableString.ToString().Contains("@"))
-					{
-						editor.SelectionColor = contextTextColor;
-					}
-
-					// Project reference
-					else if (highlightableString.ToString().Contains("+"))
-					{
-						editor.SelectionColor = projectTextColor;
-					}
-
-					// After the highlightment we put the cursor back to its initial position.
-					editor.SelectionStart = selectionPosition;
-					editor.SelectionLength = 0;
-					editor.SelectionColor = defaultTextColor;
-					editor.SelectionBackColor = defaultBackColor;
-				}
-				catch (Exception e)
-				{
-					MessageBox.Show(e.InnerException.ToString());
-				}
-			}
+			//editor.Select(editor.TextLength, 0);
 		}
 
 	}

@@ -29,45 +29,33 @@
         private void InitializeComponent()
         {
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-			this.editor = new System.Windows.Forms.RichTextBox();
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.openButton = new System.Windows.Forms.ToolStripButton();
 			this.saveButton = new System.Windows.Forms.ToolStripButton();
-			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.upButton = new System.Windows.Forms.ToolStripButton();
 			this.downButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.closeTaskButton = new System.Windows.Forms.ToolStripButton();
 			this.openTaskButton = new System.Windows.Forms.ToolStripButton();
+			this.closeTaskButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.dateButton = new System.Windows.Forms.ToolStripButton();
 			this.priorityButton = new System.Windows.Forms.ToolStripDropDownButton();
 			this.criticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.highToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.lowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.nonImportantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
 			this.projectButton = new System.Windows.Forms.ToolStripButton();
 			this.contextButton = new System.Windows.Forms.ToolStripButton();
-			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-			this.dateButton = new System.Windows.Forms.ToolStripButton();
 			this.aboutButton = new System.Windows.Forms.ToolStripButton();
+			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.editor = new ScintillaNet.Scintilla();
 			this.toolStrip.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
 			this.SuspendLayout();
-			// 
-			// editor
-			// 
-			this.editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.editor.Location = new System.Drawing.Point(5, 28);
-			this.editor.Name = "editor";
-			this.editor.Size = new System.Drawing.Size(458, 334);
-			this.editor.TabIndex = 1;
-			this.editor.Text = "";
-			this.editor.WordWrap = false;
-			this.editor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.editor_KeyUp);
 			// 
 			// toolStrip
 			// 
@@ -115,10 +103,6 @@
 			this.saveButton.Text = "Save";
 			this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
 			// 
-			// openFileDialog
-			// 
-			this.openFileDialog.FileName = "todo.txt";
-			// 
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -147,15 +131,6 @@
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
 			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
-			// closeTaskButton
-			// 
-			this.closeTaskButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.closeTaskButton.Image = ((System.Drawing.Image)(resources.GetObject("closeTaskButton.Image")));
-			this.closeTaskButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.closeTaskButton.Name = "closeTaskButton";
-			this.closeTaskButton.Size = new System.Drawing.Size(23, 22);
-			this.closeTaskButton.Text = "Close task";
-			// 
 			// openTaskButton
 			// 
 			this.openTaskButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -165,10 +140,29 @@
 			this.openTaskButton.Size = new System.Drawing.Size(23, 22);
 			this.openTaskButton.Text = "Reopen task";
 			// 
+			// closeTaskButton
+			// 
+			this.closeTaskButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.closeTaskButton.Image = ((System.Drawing.Image)(resources.GetObject("closeTaskButton.Image")));
+			this.closeTaskButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.closeTaskButton.Name = "closeTaskButton";
+			this.closeTaskButton.Size = new System.Drawing.Size(23, 22);
+			this.closeTaskButton.Text = "Close task";
+			// 
 			// toolStripSeparator3
 			// 
 			this.toolStripSeparator3.Name = "toolStripSeparator3";
 			this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+			// 
+			// dateButton
+			// 
+			this.dateButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.dateButton.Enabled = false;
+			this.dateButton.Image = ((System.Drawing.Image)(resources.GetObject("dateButton.Image")));
+			this.dateButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.dateButton.Name = "dateButton";
+			this.dateButton.Size = new System.Drawing.Size(23, 22);
+			this.dateButton.Text = "Date";
 			// 
 			// priorityButton
 			// 
@@ -221,6 +215,11 @@
 			this.nonImportantToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
 			this.nonImportantToolStripMenuItem.Text = "Non Important";
 			// 
+			// toolStripSeparator4
+			// 
+			this.toolStripSeparator4.Name = "toolStripSeparator4";
+			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+			// 
 			// projectButton
 			// 
 			this.projectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -241,20 +240,6 @@
 			this.contextButton.Size = new System.Drawing.Size(23, 22);
 			this.contextButton.Text = "Contexts";
 			// 
-			// toolStripSeparator4
-			// 
-			this.toolStripSeparator4.Name = "toolStripSeparator4";
-			this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-			// 
-			// dateButton
-			// 
-			this.dateButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.dateButton.Image = ((System.Drawing.Image)(resources.GetObject("dateButton.Image")));
-			this.dateButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.dateButton.Name = "dateButton";
-			this.dateButton.Size = new System.Drawing.Size(23, 22);
-			this.dateButton.Text = "Date";
-			// 
 			// aboutButton
 			// 
 			this.aboutButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -266,19 +251,43 @@
 			this.aboutButton.Size = new System.Drawing.Size(23, 22);
 			this.aboutButton.Text = "About";
 			// 
+			// openFileDialog
+			// 
+			this.openFileDialog.FileName = "todo.txt";
+			// 
+			// editor
+			// 
+			this.editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.editor.Location = new System.Drawing.Point(5, 28);
+			this.editor.Name = "editor";
+			this.editor.Size = new System.Drawing.Size(458, 334);
+			this.editor.Styles.BraceBad.FontName = "Verdana";
+			this.editor.Styles.BraceLight.FontName = "Verdana";
+			this.editor.Styles.ControlChar.FontName = "Verdana";
+			this.editor.Styles.Default.FontName = "Verdana";
+			this.editor.Styles.IndentGuide.FontName = "Verdana";
+			this.editor.Styles.LastPredefined.FontName = "Verdana";
+			this.editor.Styles.LineNumber.FontName = "Verdana";
+			this.editor.Styles.Max.FontName = "Verdana";
+			this.editor.TabIndex = 4;
+			this.editor.CharAdded += new System.EventHandler<ScintillaNet.CharAddedEventArgs>(this.editor_CharAdded);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(467, 367);
-			this.Controls.Add(this.toolStrip);
 			this.Controls.Add(this.editor);
+			this.Controls.Add(this.toolStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.Text = "todoTxt";
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.editor)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -286,8 +295,7 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox editor;
-        private System.Windows.Forms.ToolStrip toolStrip;
+		private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton openButton;
         private System.Windows.Forms.ToolStripButton saveButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
@@ -310,6 +318,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripButton dateButton;
 		private System.Windows.Forms.ToolStripButton aboutButton;
+		private ScintillaNet.Scintilla editor;
 
     }
 }
