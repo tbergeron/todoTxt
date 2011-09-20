@@ -113,17 +113,17 @@ namespace todoTxt
 
 		private void saveButton_Click(object sender, EventArgs e)
 		{
-			//editor.SaveFile(todoTxtPath, RichTextBoxStreamType.PlainText);
+			TextWriter writer = new StreamWriter(todoTxtPath);
+			writer.Write(editor.Text);
+			writer.Close();
 		}
 
 		
 		// Methods
 		public void OpenTodoTxt()
 		{
-			todoContent = File.ReadAllText(todoTxtPath, UTF8Encoding.UTF8);
+			todoContent = File.ReadAllText(todoTxtPath);
 			editor.Text = todoContent;
-
-			//editor.Select(editor.TextLength, 0);
 		}
 
 	}
