@@ -51,17 +51,9 @@ namespace todoTxt
 			// Highlight Current Line
 			editor.Caret.HighlightCurrentLine = true;
 
-
 			// Custom Scintilla configuration
-			try
-			{
-				editor.ConfigurationManager.CustomLocation = "ScintillaNET.xml";
-				editor.ConfigurationManager.Language = "lua";
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.InnerException.ToString());
-			}
+			editor.ConfigurationManager.CustomLocation = "ScintillaNET.xml";
+			editor.ConfigurationManager.Language = "lua";
 
 			if (File.Exists(todoTxtPath))
 			{
