@@ -52,9 +52,13 @@
 			this.aboutButton = new System.Windows.Forms.ToolStripButton();
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.editor = new ScintillaNet.Scintilla();
+			this.listView = new System.Windows.Forms.ListView();
+			this.LineNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.Priority = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.TaskName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.Done = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.toolStrip.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.editor)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// toolStrip
@@ -255,31 +259,63 @@
 			// 
 			this.openFileDialog.FileName = "todo.txt";
 			// 
-			// editor
+			// listView
 			// 
-			this.editor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.listView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.editor.Location = new System.Drawing.Point(5, 28);
-			this.editor.Name = "editor";
-			this.editor.Size = new System.Drawing.Size(458, 334);
-			this.editor.Styles.BraceBad.FontName = "Verdana";
-			this.editor.Styles.BraceLight.FontName = "Verdana";
-			this.editor.Styles.ControlChar.FontName = "Verdana";
-			this.editor.Styles.Default.FontName = "Verdana";
-			this.editor.Styles.IndentGuide.FontName = "Verdana";
-			this.editor.Styles.LastPredefined.FontName = "Verdana";
-			this.editor.Styles.LineNumber.FontName = "Verdana";
-			this.editor.Styles.Max.FontName = "Verdana";
-			this.editor.TabIndex = 4;
-			this.editor.CharAdded += new System.EventHandler<ScintillaNet.CharAddedEventArgs>(this.editor_CharAdded);
+			this.listView.CheckBoxes = true;
+			this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Done,
+            this.LineNumber,
+            this.Priority,
+            this.TaskName,
+            this.Date});
+			this.listView.FullRowSelect = true;
+			this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+			this.listView.HideSelection = false;
+			this.listView.Location = new System.Drawing.Point(5, 28);
+			this.listView.MultiSelect = false;
+			this.listView.Name = "listView";
+			this.listView.Size = new System.Drawing.Size(458, 334);
+			this.listView.TabIndex = 5;
+			this.listView.UseCompatibleStateImageBehavior = false;
+			this.listView.View = System.Windows.Forms.View.Details;
+			// 
+			// LineNumber
+			// 
+			this.LineNumber.DisplayIndex = 2;
+			this.LineNumber.Text = "#";
+			this.LineNumber.Width = 0;
+			// 
+			// Priority
+			// 
+			this.Priority.DisplayIndex = 1;
+			this.Priority.Text = "P";
+			this.Priority.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			this.Priority.Width = 25;
+			// 
+			// Date
+			// 
+			this.Date.Text = "Date";
+			this.Date.Width = 75;
+			// 
+			// TaskName
+			// 
+			this.TaskName.Text = "Task";
+			this.TaskName.Width = 315;
+			// 
+			// Done
+			// 
+			this.Done.Text = "";
+			this.Done.Width = 22;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(467, 367);
-			this.Controls.Add(this.editor);
+			this.Controls.Add(this.listView);
 			this.Controls.Add(this.toolStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
@@ -287,7 +323,6 @@
 			this.Load += new System.EventHandler(this.MainForm_Load);
 			this.toolStrip.ResumeLayout(false);
 			this.toolStrip.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.editor)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -318,7 +353,12 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
 		private System.Windows.Forms.ToolStripButton dateButton;
 		private System.Windows.Forms.ToolStripButton aboutButton;
-		private ScintillaNet.Scintilla editor;
+		private System.Windows.Forms.ListView listView;
+		private System.Windows.Forms.ColumnHeader LineNumber;
+		private System.Windows.Forms.ColumnHeader TaskName;
+		private System.Windows.Forms.ColumnHeader Priority;
+		private System.Windows.Forms.ColumnHeader Date;
+		private System.Windows.Forms.ColumnHeader Done;
 
     }
 }

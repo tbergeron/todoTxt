@@ -12,26 +12,27 @@ namespace todoTxt
 	{
 		// Properties
 
-		// Text file path & content
+		// Text file path, content & data
 		public string todoTxtPath;
-		public string todoContent;
+		public string[] todoContentLines;
+		public string[] todoDates;
+		public string[] todoPriorities;
+		public string[] todoTasks;
+		public bool[] todoDone;
 
-		// Text highlightable strings
-		public Regex highlightableStrings = new Regex(@"@\w*|\+\w*|[\n|\r]x\s|^x\s|\([ABCDE]{1}\)");
-
-		// Text highlighting colors
-		public Color defaultTextColor = Color.Black;
-		public Color defaultBackColor = Color.White;
-		public Color contextTextColor = Color.Blue;
-		public Color projectTextColor = Color.Green;
+		// Regexes
+		// @\w*|\+\w*|[\n|\r]x\s|
+		public Regex doneRegex = new Regex(@"^x\s");
+		public Regex priorityRegex = new Regex(@"\([ABCDE]{1}\)");
+		public Regex dateRegex = new Regex(@"[0-9]{4}-[0-9]{2}-[0-9]{2}");
 
 		// Priorities colors
+		// TODO : Change colors by icons.
 		public Color priorityATextColor = Color.Red;
 		public Color priorityBTextColor = Color.OrangeRed;
 		public Color priorityCTextColor = Color.Yellow;
 		public Color priorityDTextColor = Color.YellowGreen;
 		public Color priorityETextColor = Color.Green;
-		public Color priorityBackColor = Color.Black;
 
 		// Constuctor
 		public MainForm()
@@ -45,58 +46,11 @@ namespace todoTxt
 		{
 			todoTxtPath = Properties.Settings.Default.todoTxtRecentPath;
 
-			// Line numbers
-			editor.Margins[0].Width = 20;
-
-			// Highlight Current Line
-			editor.Caret.HighlightCurrentLine = true;
-
-			// Custom Scintilla configuration
-			editor.ConfigurationManager.CustomLocation = "ScintillaNET.xml";
-			editor.ConfigurationManager.Language = "lua";
-
 			if (File.Exists(todoTxtPath))
 			{
 				OpenTodoTxt();
 			}
 
-		}
-
-		private void editor_CharAdded(object sender, ScintillaNet.CharAddedEventArgs e)
-		{
-			// Dynamic keywords
-			//if (e.Ch == ':')
-			//{
-			//    string wp = string.Empty;
-			//    Regex r = new Regex(@"\b\w+[:\b]");
-			//    MatchCollection m = r.Matches(editor.Text);
-			//    for (int i = 0; i < m.Count; i++)
-			//    {
-			//        wp += " " + m[i].Value.Substring(0, m[i].Value.Length - 1);
-			//    }
-			//    editor.Lexing.Keywords[2] = wp;
-			//}
-
-			//if (e.Ch == '@')
-			//{
-			//    string keywords = string.Empty;
-			//    string match = string.Empty;
-
-			//    Regex regex = new Regex(@"@\w*");
-			//    MatchCollection matches = regex.Matches(editor.Text);
-
-			//    for (int i = 0; i < matches.Count; i++)
-			//    {
-			//        match = matches[i].Value.ToLower().Replace("@", "");
-
-			//        if (!keywords.Contains(match))
-			//        {
-			//            keywords += match + " ";
-			//        }
-			//    }
-
-			//    editor.Lexing.Keywords[2] = keywords.TrimEnd();
-			//}
 		}
 
 		private void openButton_Click(object sender, EventArgs e)
@@ -114,7 +68,12 @@ namespace todoTxt
 		private void saveButton_Click(object sender, EventArgs e)
 		{
 			TextWriter writer = new StreamWriter(todoTxtPath);
-			writer.Write(editor.Text);
+			
+			foreach (string line in todoContentLines)
+			{
+				writer.WriteLine(line);
+			}
+
 			writer.Close();
 		}
 
@@ -122,8 +81,81 @@ namespace todoTxt
 		// Methods
 		public void OpenTodoTxt()
 		{
-			todoContent = File.ReadAllText(todoTxtPath);
-			editor.Text = todoContent;
+			todoContentLines = File.ReadAllLines(todoTxtPath);
+
+			todoPriorities = new string[todoContentLines.Length];
+			todoDates = new string[todoContentLines.Length];
+			todoTasks = new string[todoContentLines.Length];
+			todoDone = new bool[todoContentLines.Length];
+
+			string date = String.Empty;
+			string priority = String.Empty;
+			string task = String.Empty;
+			bool done = false;
+
+			int lineNumber = 0;
+			foreach (string line in todoContentLines)
+			{
+				date = "";
+				priority = "";
+				task = line;
+				done = false;
+
+				if (doneRegex.Match(line).Success)
+				{
+					done = true;
+					todoDone[lineNumber] = true;
+					task = line.Replace("x ", "");
+				}
+
+				if (priorityRegex.Match(line).Success)
+				{
+					priority = priorityRegex.Match(line).Value;
+					todoPriorities[lineNumber] = priority;
+					task = task.Replace(priority + " ", "");
+				}
+
+				if (dateRegex.Match(line).Success)
+				{
+					date = dateRegex.Match(line).Value;
+					todoDates[lineNumber] = date;
+					task = task.Replace(date + " ", "");
+				}
+
+				var newRow = listView.Items.Add("");
+				newRow.Checked = done;
+				newRow.UseItemStyleForSubItems = false;
+
+				newRow.SubItems.Add(lineNumber.ToString());
+				
+				
+				newRow.SubItems.Add(priority);
+				if (priority.Contains("A"))
+				{
+					newRow.SubItems[2].ForeColor = priorityATextColor;
+				}
+				else if (priority.Contains("B"))
+				{
+					newRow.SubItems[2].ForeColor = priorityBTextColor;
+				}
+				else if (priority.Contains("C"))
+				{
+					newRow.SubItems[2].ForeColor = priorityCTextColor;
+				}
+				else if (priority.Contains("D"))
+				{
+					newRow.SubItems[2].ForeColor = priorityDTextColor;
+				}
+				else if (priority.Contains("E"))
+				{
+					newRow.SubItems[2].ForeColor = priorityETextColor;
+				}
+				
+				newRow.SubItems.Add(task);
+				newRow.SubItems.Add(date);
+
+				lineNumber++;
+			}
 		}
 
 	}
