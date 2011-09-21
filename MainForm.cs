@@ -111,7 +111,6 @@ namespace todoTxt
 				if (priorityRegex.Match(line).Success)
 				{
 					priority = priorityRegex.Match(line).Value;
-					todoPriorities[lineNumber] = priority;
 					task = task.Replace(priority + " ", "");
 				}
 
@@ -128,27 +127,25 @@ namespace todoTxt
 
 				newRow.SubItems.Add(lineNumber.ToString());
 				
-				
-				newRow.SubItems.Add(priority);
 				if (priority.Contains("A"))
 				{
-					newRow.SubItems[2].ForeColor = priorityATextColor;
+					newRow.ImageIndex = 0;
 				}
 				else if (priority.Contains("B"))
 				{
-					newRow.SubItems[2].ForeColor = priorityBTextColor;
+					newRow.ImageIndex = 1;
 				}
 				else if (priority.Contains("C"))
 				{
-					newRow.SubItems[2].ForeColor = priorityCTextColor;
+					newRow.ImageIndex = 2;
 				}
 				else if (priority.Contains("D"))
 				{
-					newRow.SubItems[2].ForeColor = priorityDTextColor;
+					newRow.ImageIndex = 3;
 				}
 				else if (priority.Contains("E"))
 				{
-					newRow.SubItems[2].ForeColor = priorityETextColor;
+					newRow.ImageIndex = 4;
 				}
 				
 				newRow.SubItems.Add(task);

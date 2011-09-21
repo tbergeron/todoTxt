@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.toolStrip = new System.Windows.Forms.ToolStrip();
 			this.openButton = new System.Windows.Forms.ToolStripButton();
@@ -53,11 +54,11 @@
 			this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.listView = new System.Windows.Forms.ListView();
-			this.LineNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.Priority = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.TaskName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Done = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.LineNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.TaskName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.priorityImageList = new System.Windows.Forms.ImageList(this.components);
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -268,7 +269,6 @@
 			this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Done,
             this.LineNumber,
-            this.Priority,
             this.TaskName,
             this.Date});
 			this.listView.FullRowSelect = true;
@@ -278,9 +278,15 @@
 			this.listView.MultiSelect = false;
 			this.listView.Name = "listView";
 			this.listView.Size = new System.Drawing.Size(458, 334);
+			this.listView.SmallImageList = this.priorityImageList;
 			this.listView.TabIndex = 5;
 			this.listView.UseCompatibleStateImageBehavior = false;
 			this.listView.View = System.Windows.Forms.View.Details;
+			// 
+			// Done
+			// 
+			this.Done.Text = "";
+			this.Done.Width = 42;
 			// 
 			// LineNumber
 			// 
@@ -288,27 +294,25 @@
 			this.LineNumber.Text = "#";
 			this.LineNumber.Width = 0;
 			// 
-			// Priority
+			// TaskName
 			// 
-			this.Priority.DisplayIndex = 1;
-			this.Priority.Text = "P";
-			this.Priority.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			this.Priority.Width = 25;
+			this.TaskName.Text = "Task";
+			this.TaskName.Width = 320;
 			// 
 			// Date
 			// 
 			this.Date.Text = "Date";
 			this.Date.Width = 75;
 			// 
-			// TaskName
+			// priorityImageList
 			// 
-			this.TaskName.Text = "Task";
-			this.TaskName.Width = 315;
-			// 
-			// Done
-			// 
-			this.Done.Text = "";
-			this.Done.Width = 22;
+			this.priorityImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("priorityImageList.ImageStream")));
+			this.priorityImageList.TransparentColor = System.Drawing.Color.Transparent;
+			this.priorityImageList.Images.SetKeyName(0, "bullet_red.png");
+			this.priorityImageList.Images.SetKeyName(1, "bullet_orange.png");
+			this.priorityImageList.Images.SetKeyName(2, "bullet_yellow.png");
+			this.priorityImageList.Images.SetKeyName(3, "bullet_green.png");
+			this.priorityImageList.Images.SetKeyName(4, "bullet_blue.png");
 			// 
 			// MainForm
 			// 
@@ -356,9 +360,9 @@
 		private System.Windows.Forms.ListView listView;
 		private System.Windows.Forms.ColumnHeader LineNumber;
 		private System.Windows.Forms.ColumnHeader TaskName;
-		private System.Windows.Forms.ColumnHeader Priority;
 		private System.Windows.Forms.ColumnHeader Date;
 		private System.Windows.Forms.ColumnHeader Done;
+		private System.Windows.Forms.ImageList priorityImageList;
 
     }
 }
