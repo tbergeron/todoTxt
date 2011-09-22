@@ -59,6 +59,8 @@
 			this.TaskName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.priorityImageList = new System.Windows.Forms.ImageList(this.components);
+			this.addTaskToolStripButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -69,6 +71,8 @@
             this.openButton,
             this.saveButton,
             this.toolStripSeparator1,
+            this.addTaskToolStripButton,
+            this.toolStripSeparator5,
             this.upButton,
             this.downButton,
             this.toolStripSeparator2,
@@ -290,7 +294,6 @@
 			// 
 			// LineNumber
 			// 
-			this.LineNumber.DisplayIndex = 2;
 			this.LineNumber.Text = "#";
 			this.LineNumber.Width = 0;
 			// 
@@ -313,6 +316,21 @@
 			this.priorityImageList.Images.SetKeyName(2, "bullet_yellow.png");
 			this.priorityImageList.Images.SetKeyName(3, "bullet_green.png");
 			this.priorityImageList.Images.SetKeyName(4, "bullet_blue.png");
+			// 
+			// addTaskToolStripButton
+			// 
+			this.addTaskToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.addTaskToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("addTaskToolStripButton.Image")));
+			this.addTaskToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.addTaskToolStripButton.Name = "addTaskToolStripButton";
+			this.addTaskToolStripButton.Size = new System.Drawing.Size(23, 22);
+			this.addTaskToolStripButton.Text = "toolStripButton1";
+			this.addTaskToolStripButton.Click += new System.EventHandler(this.addTaskToolStripButton_Click);
+			// 
+			// toolStripSeparator5
+			// 
+			this.toolStripSeparator5.Name = "toolStripSeparator5";
+			this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
 			// 
 			// MainForm
 			// 
@@ -363,6 +381,8 @@
 		private System.Windows.Forms.ColumnHeader Date;
 		private System.Windows.Forms.ColumnHeader Done;
 		private System.Windows.Forms.ImageList priorityImageList;
+		private System.Windows.Forms.ToolStripButton addTaskToolStripButton;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 
     }
 }

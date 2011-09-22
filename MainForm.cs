@@ -96,6 +96,15 @@ namespace todoTxt
 			writer.Close();
 		}
 
+		private void addTaskToolStripButton_Click(object sender, EventArgs e)
+		{
+			EditForm addForm = new EditForm();
+
+			addForm.addMode = true;
+
+			addForm.Show();
+		}
+
 		
 		// Methods
 		public void OpenTodoTxt()
