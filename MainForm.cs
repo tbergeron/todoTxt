@@ -100,11 +100,21 @@ namespace todoTxt
 		{
 			EditForm addForm = new EditForm();
 
+            addForm.mainForm = this;
 			addForm.addMode = true;
 
 			addForm.Show();
 		}
 
+        private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EditForm editForm = new EditForm();
+
+            editForm.mainForm = this;
+            editForm.lineNumber = listView.SelectedItems[0].Index;
+
+            editForm.Show();
+        }
 		
 		// Methods
 		public void OpenTodoTxt()
@@ -175,7 +185,9 @@ namespace todoTxt
 				{
 					newRow.ImageIndex = 4;
 				}
-				
+
+                todoTasks[lineNumber] = task;
+
 				newRow.SubItems.Add(task);
 				newRow.SubItems.Add(date);
 

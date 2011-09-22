@@ -13,6 +13,7 @@ namespace todoTxt
 	{
 		public bool addMode = false;
 		public int lineNumber = 0;
+        public MainForm mainForm;
 
 		public EditForm()
 		{
@@ -21,7 +22,12 @@ namespace todoTxt
 
 		private void EditForm_Load(object sender, EventArgs e)
 		{
+            if (!addMode)
+            {
+                taskNameTextBox.Text = mainForm.todoTasks[lineNumber];
 
+
+            }
 		}
 	}
 }
