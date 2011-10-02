@@ -24,9 +24,13 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace todoTxt
 {
+	/// <summary>
+	/// Main Form
+	/// </summary>
 	public partial class MainForm : Form
 	{
 		// Properties
@@ -37,23 +41,23 @@ namespace todoTxt
 		public string[] todoDates;
 		public string[] todoPriorities;
 		public string[] todoTasks;
+		public string[] todoContexts;
+		public string[] todoProjects;
 		public bool[] todoDone;
 
+		public Stack<string> todoContextsStack = new Stack<string>();
+		public Stack<string> todoProjectsStack = new Stack<string>();
+
 		// Regexes
-		// @\w*|\+\w*|[\n|\r]x\s|
-		public Regex doneRegex = new Regex(@"^x\s");
-		public Regex priorityRegex = new Regex(@"\([ABCDE]{1}\)");
-		public Regex dateRegex = new Regex(@"[0-9]{4}-[0-9]{2}-[0-9]{2}");
+		private Regex doneRegex = new Regex(@"^x\s");
+		private Regex priorityRegex = new Regex(@"\([ABCDE]{1}\)");
+		private Regex dateRegex = new Regex(@"[0-9]{4}-[0-9]{2}-[0-9]{2}");
+		private Regex contextRegex = new Regex(@"@\w*");
+		private Regex projectRegex = new Regex(@"\+\w*");
 
-		// Priorities colors
-		// TODO : Change colors by icons.
-		public Color priorityATextColor = Color.Red;
-		public Color priorityBTextColor = Color.OrangeRed;
-		public Color priorityCTextColor = Color.Yellow;
-		public Color priorityDTextColor = Color.YellowGreen;
-		public Color priorityETextColor = Color.Green;
-
+		
 		// Constuctor
+		
 		public MainForm()
 		{
 			InitializeComponent();
@@ -61,6 +65,7 @@ namespace todoTxt
 
 		
 		// Events
+		
 		private void MainForm_Load(object sender, EventArgs e)
 		{
 			todoTxtPath = Properties.Settings.Default.todoTxtRecentPath;
@@ -108,6 +113,9 @@ namespace todoTxt
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+			// Preventing listView's checkboxes to get checked/unchecked on double clicks.
+			listView.SelectedItems[0].Checked = (listView.SelectedItems[0].Checked) ? false : true;
+
             EditForm editForm = new EditForm();
 
             editForm.mainForm = this;
@@ -116,7 +124,9 @@ namespace todoTxt
             editForm.Show();
         }
 		
+
 		// Methods
+		
 		public void OpenTodoTxt()
 		{
 			todoContentLines = File.ReadAllLines(todoTxtPath);
@@ -124,11 +134,15 @@ namespace todoTxt
 			todoPriorities = new string[todoContentLines.Length];
 			todoDates = new string[todoContentLines.Length];
 			todoTasks = new string[todoContentLines.Length];
+			todoContexts = new string[todoContentLines.Length];
+			todoProjects = new string[todoContentLines.Length];
 			todoDone = new bool[todoContentLines.Length];
 
 			string date = String.Empty;
 			string priority = String.Empty;
 			string task = String.Empty;
+			string context = String.Empty;
+			string project = String.Empty;
 			bool done = false;
 
 			int lineNumber = 0;
@@ -136,6 +150,8 @@ namespace todoTxt
 			{
 				date = "";
 				priority = "";
+				context = "";
+				project = "";
 				task = line;
 				done = false;
 
@@ -149,6 +165,7 @@ namespace todoTxt
 				if (priorityRegex.Match(line).Success)
 				{
 					priority = priorityRegex.Match(line).Value;
+					todoPriorities[lineNumber] = priority.Replace("(", "").Replace(")", "");
 					task = task.Replace(priority + " ", "");
 				}
 
@@ -157,6 +174,31 @@ namespace todoTxt
 					date = dateRegex.Match(line).Value;
 					todoDates[lineNumber] = date;
 					task = task.Replace(date + " ", "");
+				}
+
+
+				if (contextRegex.Match(line).Success)
+				{
+					context = contextRegex.Match(line).Value;
+
+					todoContexts[lineNumber] = context;
+
+					if (!todoContextsStack.Contains(context))
+					{
+						todoContextsStack.Push(contextRegex.Match(line).Value);
+					}
+				}
+
+				if (projectRegex.Match(line).Success)
+				{
+					project = projectRegex.Match(line).Value;
+
+					todoProjects[lineNumber] = project;
+
+					if (!todoProjectsStack.Contains(project))
+					{
+						todoProjectsStack.Push(projectRegex.Match(line).Value);
+					}
 				}
 
 				var newRow = listView.Items.Add("");
