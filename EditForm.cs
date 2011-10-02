@@ -69,7 +69,6 @@ namespace todoTxt
 				{
 					string priority = mainForm.todoPriorities[lineNumber];
 
-					// TODO: There's definitively a better way to do so...
 					if (priority == "A")
 					{
 						priorityComboBox.SelectedIndex = 0;
@@ -114,6 +113,11 @@ namespace todoTxt
 					projectComboBox.SelectedIndex = projectComboBox.Items.Count -1;
 				}
 			}
+
+		}
+
+		private void saveButton_Click(object sender, EventArgs e)
+		{
 
 		}
 

@@ -190,6 +190,7 @@ namespace todoTxt
 			this.saveButton.TabIndex = 13;
 			this.saveButton.Text = "Save";
 			this.saveButton.UseVisualStyleBackColor = true;
+			this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
 			// 
 			// groupBox1
 			// 
