@@ -233,7 +233,7 @@ namespace todoTxt
 			this.Controls.Add(this.label1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "EditForm";
-			this.Text = "Add a task";
+			this.Text = "Edit a task";
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.EditForm_FormClosed);
 			this.Load += new System.EventHandler(this.EditForm_Load);
 			this.ResumeLayout(false);

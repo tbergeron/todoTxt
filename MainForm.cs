@@ -100,8 +100,24 @@ namespace todoTxt
 
             addForm.mainForm = this;
 			addForm.addMode = true;
+			addForm.lineNumber = todoContentLines.Length +1;
 
 			addForm.Show();
+		}
+
+		private void deleteToolStripButton_Click(object sender, EventArgs e)
+		{
+			int lineNumber = listView.SelectedItems[0].Index;
+
+			if (MessageBox.Show("Are you sure to delete \"" + todoTasks[lineNumber].Trim() + "\" ?", "Confirm delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+			{
+				// Setting the selected line to null so it gets skipped while saving.
+				todoContentLines[lineNumber] = null;
+				Save();
+
+				OpenTodoTxt();
+			}
+
 		}
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -273,7 +289,10 @@ namespace todoTxt
 			{
 				foreach (string line in todoContentLines)
 				{
-					writer.WriteLine(line);
+					if (line != null)
+					{
+						writer.WriteLine(line);
+					}
 				}
 			}
 		}

@@ -48,10 +48,11 @@
 			this.Done = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.LineNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.TaskName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.priorityImageList = new System.Windows.Forms.ImageList(this.components);
 			this.ContextName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ProjectName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.priorityImageList = new System.Windows.Forms.ImageList(this.components);
+			this.deleteToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -63,6 +64,7 @@
             this.saveButton,
             this.toolStripSeparator1,
             this.addTaskToolStripButton,
+            this.deleteToolStripButton,
             this.toolStripSeparator5,
             this.upButton,
             this.downButton,
@@ -109,7 +111,7 @@
 			this.addTaskToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.addTaskToolStripButton.Name = "addTaskToolStripButton";
 			this.addTaskToolStripButton.Size = new System.Drawing.Size(23, 22);
-			this.addTaskToolStripButton.Text = "toolStripButton1";
+			this.addTaskToolStripButton.Text = "Add a new task";
 			this.addTaskToolStripButton.Click += new System.EventHandler(this.addTaskToolStripButton_Click);
 			// 
 			// toolStripSeparator5
@@ -218,6 +220,16 @@
 			this.TaskName.Text = "Task";
 			this.TaskName.Width = 280;
 			// 
+			// ContextName
+			// 
+			this.ContextName.Text = "Context";
+			this.ContextName.Width = 80;
+			// 
+			// ProjectName
+			// 
+			this.ProjectName.Text = "Project";
+			this.ProjectName.Width = 80;
+			// 
 			// Date
 			// 
 			this.Date.Text = "Date";
@@ -233,15 +245,15 @@
 			this.priorityImageList.Images.SetKeyName(3, "bullet_green.png");
 			this.priorityImageList.Images.SetKeyName(4, "bullet_blue.png");
 			// 
-			// ContextName
+			// deleteToolStripButton
 			// 
-			this.ContextName.Text = "Context";
-			this.ContextName.Width = 80;
-			// 
-			// ProjectName
-			// 
-			this.ProjectName.Text = "Project";
-			this.ProjectName.Width = 80;
+			this.deleteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.deleteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripButton.Image")));
+			this.deleteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.deleteToolStripButton.Name = "deleteToolStripButton";
+			this.deleteToolStripButton.Size = new System.Drawing.Size(23, 22);
+			this.deleteToolStripButton.Text = "Delete selected task";
+			this.deleteToolStripButton.Click += new System.EventHandler(this.deleteToolStripButton_Click);
 			// 
 			// MainForm
 			// 
@@ -285,6 +297,7 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
 		private System.Windows.Forms.ColumnHeader ContextName;
 		private System.Windows.Forms.ColumnHeader ProjectName;
+		private System.Windows.Forms.ToolStripButton deleteToolStripButton;
 
     }
 }

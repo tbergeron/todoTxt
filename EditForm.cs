@@ -15,7 +15,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
- */
+ */   
 
 using System;
 using System.Collections.Generic;
@@ -91,6 +91,10 @@ namespace todoTxt
 						priorityComboBox.SelectedIndex = 4;
 					}
 				}
+			}
+			else
+			{
+				Text = "Add a new task";
 			}
 
 			// Contexts
@@ -174,7 +178,24 @@ namespace todoTxt
 			lineToWrite = lineToWrite + projectComboBox.Text + " ";
 
 			// Writing the line.
-			mainForm.todoContentLines[lineNumber] = lineToWrite;
+			if (lineNumber > mainForm.todoContentLines.Length)
+			{
+				// Not being able to modify the size of a fixed array SUCKS.
+				string[] newTodoContentLines = new string[lineNumber];
+
+				for (int i = 0; i < mainForm.todoContentLines.Length; i++)
+				{
+					newTodoContentLines[i] = mainForm.todoContentLines[i];
+				}
+
+				newTodoContentLines[lineNumber -1] = lineToWrite;
+
+				mainForm.todoContentLines = newTodoContentLines;
+			}
+			else
+			{
+				mainForm.todoContentLines[lineNumber] = lineToWrite;
+			}
 
 			mainForm.Save();
 
