@@ -50,6 +50,8 @@
 			this.TaskName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.priorityImageList = new System.Windows.Forms.ImageList(this.components);
+			this.ContextName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.ProjectName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -71,7 +73,7 @@
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-			this.toolStrip.Size = new System.Drawing.Size(467, 25);
+			this.toolStrip.Size = new System.Drawing.Size(588, 25);
 			this.toolStrip.TabIndex = 2;
 			this.toolStrip.Text = "toolStrip1";
 			// 
@@ -185,6 +187,8 @@
             this.Done,
             this.LineNumber,
             this.TaskName,
+            this.ContextName,
+            this.ProjectName,
             this.Date});
 			this.listView.FullRowSelect = true;
 			this.listView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -192,7 +196,7 @@
 			this.listView.Location = new System.Drawing.Point(5, 28);
 			this.listView.MultiSelect = false;
 			this.listView.Name = "listView";
-			this.listView.Size = new System.Drawing.Size(458, 334);
+			this.listView.Size = new System.Drawing.Size(579, 334);
 			this.listView.SmallImageList = this.priorityImageList;
 			this.listView.TabIndex = 5;
 			this.listView.UseCompatibleStateImageBehavior = false;
@@ -212,7 +216,7 @@
 			// TaskName
 			// 
 			this.TaskName.Text = "Task";
-			this.TaskName.Width = 320;
+			this.TaskName.Width = 280;
 			// 
 			// Date
 			// 
@@ -229,11 +233,21 @@
 			this.priorityImageList.Images.SetKeyName(3, "bullet_green.png");
 			this.priorityImageList.Images.SetKeyName(4, "bullet_blue.png");
 			// 
+			// ContextName
+			// 
+			this.ContextName.Text = "Context";
+			this.ContextName.Width = 80;
+			// 
+			// ProjectName
+			// 
+			this.ProjectName.Text = "Project";
+			this.ProjectName.Width = 80;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(467, 367);
+			this.ClientSize = new System.Drawing.Size(588, 367);
 			this.Controls.Add(this.listView);
 			this.Controls.Add(this.toolStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -269,6 +283,8 @@
 		private System.Windows.Forms.ImageList priorityImageList;
 		private System.Windows.Forms.ToolStripButton addTaskToolStripButton;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+		private System.Windows.Forms.ColumnHeader ContextName;
+		private System.Windows.Forms.ColumnHeader ProjectName;
 
     }
 }

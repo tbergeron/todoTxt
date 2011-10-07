@@ -91,14 +91,7 @@ namespace todoTxt
 
 		private void saveButton_Click(object sender, EventArgs e)
 		{
-			TextWriter writer = new StreamWriter(todoTxtPath);
-			
-			foreach (string line in todoContentLines)
-			{
-				writer.WriteLine(line);
-			}
-
-			writer.Close();
+			Save();
 		}
 
 		private void addTaskToolStripButton_Click(object sender, EventArgs e)
@@ -129,6 +122,8 @@ namespace todoTxt
 		
 		public void OpenTodoTxt()
 		{
+			listView.Items.Clear();
+
 			todoContentLines = File.ReadAllLines(todoTxtPath);
 
 			todoPriorities = new string[todoContentLines.Length];
@@ -181,6 +176,8 @@ namespace todoTxt
 				{
 					context = contextRegex.Match(line).Value;
 
+					task = task.Replace(context, "");
+
 					todoContexts[lineNumber] = context;
 
 					if (!todoContextsStack.Contains(context))
@@ -193,6 +190,8 @@ namespace todoTxt
 				{
 					project = projectRegex.Match(line).Value;
 
+					task = task.Replace(project, "");
+
 					todoProjects[lineNumber] = project;
 
 					if (!todoProjectsStack.Contains(project))
@@ -203,25 +202,42 @@ namespace todoTxt
 
 				var newRow = listView.Items.Add("");
 				newRow.Checked = done;
-				newRow.UseItemStyleForSubItems = false;
+				//newRow.UseItemStyleForSubItems = false;
 
 				newRow.SubItems.Add(lineNumber.ToString());
 				
 				if (priority.Contains("A"))
 				{
+					if (!done)
+					{
+						newRow.BackColor = Color.Red;
+						newRow.ForeColor = Color.White;
+					}
 					newRow.ImageIndex = 0;
 				}
 				else if (priority.Contains("B"))
 				{
-					newRow.ImageIndex = 1;
+					if (!done)
+					{
+						newRow.BackColor = Color.Orange;
+						newRow.ImageIndex = 1;
+					}
 				}
 				else if (priority.Contains("C"))
 				{
-					newRow.ImageIndex = 2;
+					if (!done)
+					{
+						newRow.BackColor = Color.Yellow;
+						newRow.ImageIndex = 2;
+					}
 				}
 				else if (priority.Contains("D"))
 				{
-					newRow.ImageIndex = 3;
+					if (!done)
+					{
+						newRow.BackColor = Color.YellowGreen;
+						newRow.ImageIndex = 3;
+					}
 				}
 				else if (priority.Contains("E"))
 				{
@@ -232,6 +248,8 @@ namespace todoTxt
 
 				newRow.SubItems.Add(task);
 				newRow.SubItems.Add(date);
+				newRow.SubItems.Add(context);
+				newRow.SubItems.Add(project);
 
 				lineNumber++;
 			}
@@ -241,6 +259,23 @@ namespace todoTxt
 		{
 			AboutForm aboutForm = new AboutForm();
 			aboutForm.Show();
+		}
+
+
+		// Methods
+
+		/// <summary>
+		/// Saves file content on the disk.
+		/// </summary>
+		public void Save()
+		{
+			using (TextWriter writer = new StreamWriter(todoTxtPath))
+			{
+				foreach (string line in todoContentLines)
+				{
+					writer.WriteLine(line);
+				}
+			}
 		}
 
 	}

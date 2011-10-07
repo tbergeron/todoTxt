@@ -25,6 +25,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace todoTxt
 {
@@ -37,7 +38,7 @@ namespace todoTxt
 
 		public bool addMode = false;
 		public int lineNumber = 0;
-        public MainForm mainForm;
+		public MainForm mainForm;
 
 
 		// Constructor
@@ -52,9 +53,9 @@ namespace todoTxt
 
 		private void EditForm_Load(object sender, EventArgs e)
 		{
-            if (!addMode)
-            {
-                taskNameTextBox.Text = mainForm.todoTasks[lineNumber];
+			if (!addMode)
+			{
+				taskNameTextBox.Text = mainForm.todoTasks[lineNumber].Trim();
 
 				string date = mainForm.todoDates[lineNumber];
 
@@ -90,27 +91,31 @@ namespace todoTxt
 						priorityComboBox.SelectedIndex = 4;
 					}
 				}
-            }
+			}
 
 			// Contexts
+			contextComboBox.Items.Add("");
+
 			foreach (var context in mainForm.todoContextsStack)
 			{
 				contextComboBox.Items.Add(context);
 
 				if ((!addMode) && (mainForm.todoContexts[lineNumber] == context))
 				{
-					contextComboBox.SelectedIndex = contextComboBox.Items.Count -1;
+					contextComboBox.SelectedIndex = contextComboBox.Items.Count - 1;
 				}
 			}
 
 			// Projects
+			projectComboBox.Items.Add("");
+			
 			foreach (var project in mainForm.todoProjectsStack)
 			{
 				projectComboBox.Items.Add(project);
 
 				if ((!addMode) && (mainForm.todoProjects[lineNumber] == project))
 				{
-					projectComboBox.SelectedIndex = projectComboBox.Items.Count -1;
+					projectComboBox.SelectedIndex = projectComboBox.Items.Count - 1;
 				}
 			}
 
@@ -118,9 +123,67 @@ namespace todoTxt
 
 		private void saveButton_Click(object sender, EventArgs e)
 		{
+			// Preparing the line to write.
+			string lineToWrite = String.Empty;
 
+			// If the task is done.
+			if (doneCheckBox.Checked)
+			{
+				lineToWrite = "x ";
+			}
+
+			// Due Date
+			lineToWrite = lineToWrite + dueDateTimePicker.Text + " ";
+
+			// Priority
+			string priority = String.Empty;
+
+			if (priorityComboBox.SelectedIndex == 0)
+			{
+				priority = "(A)";
+			}
+			else if (priorityComboBox.SelectedIndex == 1)
+			{
+				priority = "(B)";
+			}
+			else if (priorityComboBox.SelectedIndex == 2)
+			{
+				priority = "(C)";
+			}
+			else if (priorityComboBox.SelectedIndex == 3)
+			{
+				priority = "(D)";
+			}
+			else if (priorityComboBox.SelectedIndex == 4)
+			{
+				priority = "(E)";
+			}
+
+			if (priority.Length > 0)
+			{
+				lineToWrite = lineToWrite + priority + " ";
+			}
+
+			// Task
+			lineToWrite = lineToWrite + taskNameTextBox.Text + " ";
+
+			// Context
+			lineToWrite = lineToWrite + contextComboBox.Text + " ";
+
+			// Project
+			lineToWrite = lineToWrite + projectComboBox.Text + " ";
+
+			// Writing the line.
+			mainForm.todoContentLines[lineNumber] = lineToWrite;
+
+			mainForm.Save();
+
+			this.Close();
 		}
 
-
+		private void EditForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			mainForm.OpenTodoTxt();
+		}
 	}
 }
