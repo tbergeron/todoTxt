@@ -123,7 +123,7 @@ namespace todoTxt
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
 			// Preventing listView's checkboxes to get checked/unchecked on double clicks.
-			listView.SelectedItems[0].Checked = (listView.SelectedItems[0].Checked) ? false : true;
+			//listView.SelectedItems[0].Checked = (listView.SelectedItems[0].Checked) ? false : true;
 
             EditForm editForm = new EditForm();
 
@@ -132,6 +132,14 @@ namespace todoTxt
 
             editForm.Show();
         }
+
+		private void listView_ItemCheck(object sender, ItemCheckEventArgs e)
+		{
+			if (e.Index % 2 == 1)
+			{
+				e.NewValue = e.CurrentValue;
+			}
+		}
 		
 
 		// Methods

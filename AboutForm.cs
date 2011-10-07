@@ -67,9 +67,29 @@ along with this program. If not, see http://www.gnu.org/licenses/.";
 
 		private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			// TODO: Exceptions? FUUUUUUUUUUU
-			ProcessStartInfo sInfo = new ProcessStartInfo("http://github.com/tbergeron/todoTxt");
-			Process.Start(sInfo);
+			ProcessStartInfo startInfo = new ProcessStartInfo("start http://github.com/tbergeron/todoTxt");
+			Process.Start(startInfo);
+		}
+
+
+		// Methods
+
+		/// <summary>
+		/// Opens the specified URL.
+		/// </summary>
+		public void OpenLink(string sUrl)
+		{
+			// TODO: Found no other legit way of opening the default browser. FFFFUUUUUUUUUU!
+			try
+			{
+				Process.Start(sUrl);
+			}
+			catch (Exception e)
+			{
+				ProcessStartInfo startInfo = new ProcessStartInfo("iexplore.exe", sUrl);
+				Process.Start(startInfo);
+				startInfo = null;
+			}
 		}
 
 	}
