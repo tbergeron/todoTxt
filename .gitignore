@@ -2,4 +2,7 @@ bin/
 obj/
 app.config
 publish
+*.sln
+*.suo
+*.pfx
 
