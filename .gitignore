@@ -2,7 +2,9 @@ bin/
 obj/
 app.config
 publish
+todoTxt.sln
 todoTxt.sln.docstates.suo
 todoTxt.suo
 todoTxt_TemporaryKey.pfx
 todoTxt.csproj.user
+todoTxt.csproj
