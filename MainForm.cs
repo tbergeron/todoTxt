@@ -135,10 +135,10 @@ namespace todoTxt
 
 		private void listView_ItemCheck(object sender, ItemCheckEventArgs e)
 		{
-			if (e.Index % 2 == 1)
-			{
-				e.NewValue = e.CurrentValue;
-			}
+			//if (e.Index % 2 == 1)
+			//{
+			//    e.NewValue = e.CurrentValue;
+			//}
 		}
 		
 
