@@ -47,6 +47,20 @@ namespace todoTxt
 
 		private void AboutForm_Load(object sender, EventArgs e)
 		{
+			string version = String.Empty;
+
+			if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+			{
+				System.Deployment.Application.ApplicationDeployment ad = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
+				version = ad.CurrentVersion.ToString();
+			}
+			else
+			{
+				version = "NOT_DEPLOYED";
+			}
+
+			Text = "todoTxt (v" + version + ")";
+			
 			aboutTextBox.Text = @"todoTxt
 adding power to your todo.txt file!
 
@@ -67,29 +81,7 @@ along with this program. If not, see http://www.gnu.org/licenses/.";
 
 		private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			ProcessStartInfo startInfo = new ProcessStartInfo("start http://github.com/tbergeron/todoTxt");
-			Process.Start(startInfo);
-		}
-
-
-		// Methods
-
-		/// <summary>
-		/// Opens the specified URL.
-		/// </summary>
-		public void OpenLink(string sUrl)
-		{
-			// TODO: Found no other legit way of opening the default browser. FFFFUUUUUUUUUU!
-			try
-			{
-				Process.Start(sUrl);
-			}
-			catch (Exception e)
-			{
-				ProcessStartInfo startInfo = new ProcessStartInfo("iexplore.exe", sUrl);
-				Process.Start(startInfo);
-				startInfo = null;
-			}
+			Process.Start("start http://github.com/tbergeron/todoTxt");
 		}
 
 	}

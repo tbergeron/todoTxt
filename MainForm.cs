@@ -98,7 +98,7 @@ namespace todoTxt
 		{
 			EditForm addForm = new EditForm();
 
-            addForm.mainForm = this;
+			addForm.mainForm = this;
 			addForm.addMode = true;
 			addForm.lineNumber = todoContentLines.Length +1;
 
@@ -120,18 +120,18 @@ namespace todoTxt
 
 		}
 
-        private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
+		private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
 			// Preventing listView's checkboxes to get checked/unchecked on double clicks.
 			//listView.SelectedItems[0].Checked = (listView.SelectedItems[0].Checked) ? false : true;
 
-            EditForm editForm = new EditForm();
+			EditForm editForm = new EditForm();
 
-            editForm.mainForm = this;
-            editForm.lineNumber = listView.SelectedItems[0].Index;
+			editForm.mainForm = this;
+			editForm.lineNumber = listView.SelectedItems[0].Index;
 
-            editForm.Show();
-        }
+			editForm.Show();
+		}
 
 		private void listView_ItemCheck(object sender, ItemCheckEventArgs e)
 		{
@@ -268,12 +268,12 @@ namespace todoTxt
 					newRow.ImageIndex = 4;
 				}
 
-                todoTasks[lineNumber] = task;
+				todoTasks[lineNumber] = task;
 
 				newRow.SubItems.Add(task);
-				newRow.SubItems.Add(date);
 				newRow.SubItems.Add(context);
 				newRow.SubItems.Add(project);
+				newRow.SubItems.Add(date);
 
 				lineNumber++;
 			}

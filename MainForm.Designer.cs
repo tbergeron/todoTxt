@@ -35,6 +35,7 @@
 			this.saveButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.addTaskToolStripButton = new System.Windows.Forms.ToolStripButton();
+			this.deleteToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
 			this.upButton = new System.Windows.Forms.ToolStripButton();
 			this.downButton = new System.Windows.Forms.ToolStripButton();
@@ -52,7 +53,6 @@
 			this.ProjectName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.priorityImageList = new System.Windows.Forms.ImageList(this.components);
-			this.deleteToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStrip.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -75,7 +75,7 @@
 			this.toolStrip.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip.Name = "toolStrip";
 			this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-			this.toolStrip.Size = new System.Drawing.Size(588, 25);
+			this.toolStrip.Size = new System.Drawing.Size(637, 25);
 			this.toolStrip.TabIndex = 2;
 			this.toolStrip.Text = "toolStrip1";
 			// 
@@ -113,6 +113,16 @@
 			this.addTaskToolStripButton.Size = new System.Drawing.Size(23, 22);
 			this.addTaskToolStripButton.Text = "Add a new task";
 			this.addTaskToolStripButton.Click += new System.EventHandler(this.addTaskToolStripButton_Click);
+			// 
+			// deleteToolStripButton
+			// 
+			this.deleteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+			this.deleteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripButton.Image")));
+			this.deleteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.deleteToolStripButton.Name = "deleteToolStripButton";
+			this.deleteToolStripButton.Size = new System.Drawing.Size(23, 22);
+			this.deleteToolStripButton.Text = "Delete selected task";
+			this.deleteToolStripButton.Click += new System.EventHandler(this.deleteToolStripButton_Click);
 			// 
 			// toolStripSeparator5
 			// 
@@ -198,13 +208,13 @@
 			this.listView.Location = new System.Drawing.Point(5, 28);
 			this.listView.MultiSelect = false;
 			this.listView.Name = "listView";
-			this.listView.Size = new System.Drawing.Size(579, 334);
+			this.listView.Size = new System.Drawing.Size(628, 334);
 			this.listView.SmallImageList = this.priorityImageList;
 			this.listView.TabIndex = 5;
 			this.listView.UseCompatibleStateImageBehavior = false;
 			this.listView.View = System.Windows.Forms.View.Details;
-			this.listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseDoubleClick);
 			this.listView.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listView_ItemCheck);
+			this.listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseDoubleClick);
 			// 
 			// Done
 			// 
@@ -224,17 +234,17 @@
 			// ContextName
 			// 
 			this.ContextName.Text = "Context";
-			this.ContextName.Width = 80;
+			this.ContextName.Width = 105;
 			// 
 			// ProjectName
 			// 
 			this.ProjectName.Text = "Project";
-			this.ProjectName.Width = 80;
+			this.ProjectName.Width = 105;
 			// 
 			// Date
 			// 
 			this.Date.Text = "Date";
-			this.Date.Width = 75;
+			this.Date.Width = 70;
 			// 
 			// priorityImageList
 			// 
@@ -246,21 +256,11 @@
 			this.priorityImageList.Images.SetKeyName(3, "bullet_green.png");
 			this.priorityImageList.Images.SetKeyName(4, "bullet_blue.png");
 			// 
-			// deleteToolStripButton
-			// 
-			this.deleteToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.deleteToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("deleteToolStripButton.Image")));
-			this.deleteToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.deleteToolStripButton.Name = "deleteToolStripButton";
-			this.deleteToolStripButton.Size = new System.Drawing.Size(23, 22);
-			this.deleteToolStripButton.Text = "Delete selected task";
-			this.deleteToolStripButton.Click += new System.EventHandler(this.deleteToolStripButton_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(588, 367);
+			this.ClientSize = new System.Drawing.Size(637, 367);
 			this.Controls.Add(this.listView);
 			this.Controls.Add(this.toolStrip);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
