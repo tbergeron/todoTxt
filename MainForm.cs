@@ -136,57 +136,57 @@ namespace todoTxt
 			//}
 		}
 
-        private void upButton_Click(object sender, EventArgs e)
-        {
-            int from = listView.SelectedItems[0].Index;
-            int to = from - 1;
-            
-            SwapStrings(todoContentLines, from, to);
-            
-            Save();
-            OpenTodoTxt();
+		private void upButton_Click(object sender, EventArgs e)
+		{
+			int from = listView.SelectedItems[0].Index;
+			int to = from - 1;
+			
+			SwapStrings(todoContentLines, from, to);
+			
+			Save();
+			OpenTodoTxt();
 
-            listView.Items[to].Selected = true;
-            listView.Select();
-        }
+			listView.Items[to].Selected = true;
+			listView.Select();
+		}
 
-        private void downButton_Click(object sender, EventArgs e)
-        {
-            int from = listView.SelectedItems[0].Index;
-            int to = from + 1;
+		private void downButton_Click(object sender, EventArgs e)
+		{
+			int from = listView.SelectedItems[0].Index;
+			int to = from + 1;
 
-            SwapStrings(todoContentLines, from, to);
+			SwapStrings(todoContentLines, from, to);
 
-            Save();
-            OpenTodoTxt();
+			Save();
+			OpenTodoTxt();
 
-            listView.Items[to].Selected = true;
-            listView.Select();
-        }
+			listView.Items[to].Selected = true;
+			listView.Select();
+		}
 
 
 		// Methods
 		
-        /// <summary>
-        /// Swaps two element of a string array.
-        /// </summary>
-        private string[] SwapStrings(string[] array, int firstIndex, int secondIndex)
-        {
-            string stringToSwap = String.Empty;
-            string swappedString = String.Empty;
+		/// <summary>
+		/// Swaps two element of a string array.
+		/// </summary>
+		private string[] SwapStrings(string[] array, int firstIndex, int secondIndex)
+		{
+			string stringToSwap = String.Empty;
+			string swappedString = String.Empty;
 
-            stringToSwap = array[firstIndex];
-            swappedString = array[secondIndex];
+			stringToSwap = array[firstIndex];
+			swappedString = array[secondIndex];
 
-            array[firstIndex] = swappedString;
-            array[secondIndex] = stringToSwap;
+			array[firstIndex] = swappedString;
+			array[secondIndex] = stringToSwap;
 
-            return array;
-        }
+			return array;
+		}
 
-        /// <summary>
-        /// Parses the content of the file and shows it in the listview.
-        /// </summary>
+		/// <summary>
+		/// Parses the content of the file and shows it in the listview.
+		/// </summary>
 		public void OpenTodoTxt()
 		{
 			listView.Items.Clear();
