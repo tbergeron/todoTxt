@@ -27,6 +27,8 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 
 namespace todoTxt
 {
@@ -47,6 +49,7 @@ namespace todoTxt
 
 		private void AboutForm_Load(object sender, EventArgs e)
 		{
+			// Version number
 			string version = String.Empty;
 
 			if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
@@ -59,24 +62,14 @@ namespace todoTxt
 				version = "NOT_DEPLOYED";
 			}
 
+			// Build date
+			FileInfo appInfo = new FileInfo(Assembly.GetExecutingAssembly().Location);
+			DateTime appBuildDate = appInfo.LastWriteTime;
+
+
 			Text = "todoTxt (v" + version + ")";
-			
-			aboutTextBox.Text = @"todoTxt
-adding power to your todo.txt file!
 
-Copyright (C) 2011 Tommy Bergeron @ Brainpad <www.brainpad.org>
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see http://www.gnu.org/licenses/.";
+			versionTextLabel.Text = "Version " + version + ", Released " + appBuildDate.ToString("yyyy-M-d");
 		}
 
 		private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

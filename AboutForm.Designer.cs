@@ -47,60 +47,88 @@ namespace todoTxt
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
-			this.aboutTextBox = new System.Windows.Forms.TextBox();
-			this.linkLabel = new System.Windows.Forms.LinkLabel();
-			this.SuspendLayout();
-			// 
-			// aboutTextBox
-			// 
-			this.aboutTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.aboutTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.aboutTextBox.Enabled = false;
-			this.aboutTextBox.Location = new System.Drawing.Point(12, 12);
-			this.aboutTextBox.Multiline = true;
-			this.aboutTextBox.Name = "aboutTextBox";
-			this.aboutTextBox.Size = new System.Drawing.Size(370, 233);
-			this.aboutTextBox.TabIndex = 0;
-			this.aboutTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// linkLabel
-			// 
-			this.linkLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.linkLabel.AutoSize = true;
-			this.linkLabel.Location = new System.Drawing.Point(106, 243);
-			this.linkLabel.Margin = new System.Windows.Forms.Padding(0);
-			this.linkLabel.Name = "linkLabel";
-			this.linkLabel.Size = new System.Drawing.Size(181, 13);
-			this.linkLabel.TabIndex = 1;
-			this.linkLabel.TabStop = true;
-			this.linkLabel.Text = "http://github.com/tbergeron/todoTxt";
-			this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
-			// 
-			// AboutForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(394, 268);
-			this.Controls.Add(this.linkLabel);
-			this.Controls.Add(this.aboutTextBox);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.MaximizeBox = false;
-			this.Name = "AboutForm";
-			this.Text = "About todoTxt...";
-			this.Load += new System.EventHandler(this.AboutForm_Load);
-			this.ResumeLayout(false);
-			this.PerformLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
+            this.linkLabel = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.versionTextLabel = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // linkLabel
+            // 
+            this.linkLabel.Location = new System.Drawing.Point(12, 110);
+            this.linkLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.linkLabel.Name = "linkLabel";
+            this.linkLabel.Size = new System.Drawing.Size(364, 23);
+            this.linkLabel.TabIndex = 1;
+            this.linkLabel.TabStop = true;
+            this.linkLabel.Text = "http://github.com/tbergeron/todoTxt";
+            this.linkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(364, 23);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "todoTxt";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(12, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(364, 23);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "adding power to your todo.txt file!";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(12, 78);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(364, 23);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Copyright (C) 2011 Tommy Bergeron @ Brainpad";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // versionTextLabel
+            // 
+            this.versionTextLabel.Location = new System.Drawing.Point(12, 27);
+            this.versionTextLabel.Name = "versionTextLabel";
+            this.versionTextLabel.Size = new System.Drawing.Size(364, 23);
+            this.versionTextLabel.TabIndex = 5;
+            this.versionTextLabel.Text = "version stuff";
+            this.versionTextLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AboutForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(389, 142);
+            this.Controls.Add(this.versionTextLabel);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.linkLabel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.Name = "AboutForm";
+            this.Text = "About todoTxt...";
+            this.Load += new System.EventHandler(this.AboutForm_Load);
+            this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.TextBox aboutTextBox;
-		private System.Windows.Forms.LinkLabel linkLabel;
+        private System.Windows.Forms.LinkLabel linkLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label versionTextLabel;
 	}
 }

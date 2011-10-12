@@ -89,11 +89,6 @@ namespace todoTxt
 			OpenTodoTxt();
 		}
 
-		private void saveButton_Click(object sender, EventArgs e)
-		{
-			Save();
-		}
-
 		private void addTaskToolStripButton_Click(object sender, EventArgs e)
 		{
 			EditForm addForm = new EditForm();
@@ -140,10 +135,58 @@ namespace todoTxt
 			//    e.NewValue = e.CurrentValue;
 			//}
 		}
-		
+
+        private void upButton_Click(object sender, EventArgs e)
+        {
+            int from = listView.SelectedItems[0].Index;
+            int to = from - 1;
+            
+            SwapStrings(todoContentLines, from, to);
+            
+            Save();
+            OpenTodoTxt();
+
+            listView.Items[to].Selected = true;
+            listView.Select();
+        }
+
+        private void downButton_Click(object sender, EventArgs e)
+        {
+            int from = listView.SelectedItems[0].Index;
+            int to = from + 1;
+
+            SwapStrings(todoContentLines, from, to);
+
+            Save();
+            OpenTodoTxt();
+
+            listView.Items[to].Selected = true;
+            listView.Select();
+        }
+
 
 		// Methods
 		
+        /// <summary>
+        /// Swaps two element of a string array.
+        /// </summary>
+        private string[] SwapStrings(string[] array, int firstIndex, int secondIndex)
+        {
+            string stringToSwap = String.Empty;
+            string swappedString = String.Empty;
+
+            stringToSwap = array[firstIndex];
+            swappedString = array[secondIndex];
+
+            array[firstIndex] = swappedString;
+            array[secondIndex] = stringToSwap;
+
+            return array;
+        }
+
+        /// <summary>
+        /// Parses the content of the file and shows it in the listview.
+        /// </summary>
 		public void OpenTodoTxt()
 		{
 			listView.Items.Clear();
