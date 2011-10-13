@@ -134,9 +134,6 @@ namespace todoTxt
 			
 			Save();
 			OpenTodoTxt();
-
-			listView.Items[to].Selected = true;
-			listView.Select();
 		}
 
 		private void downButton_Click(object sender, EventArgs e)
@@ -148,9 +145,6 @@ namespace todoTxt
 
 			Save();
 			OpenTodoTxt();
-
-			listView.Items[to].Selected = true;
-			listView.Select();
 		}
 
 
@@ -178,6 +172,14 @@ namespace todoTxt
 		/// </summary>
 		public void OpenTodoTxt()
 		{
+			// Keeping the selected item to reselect it after the process.
+			int selectedIndex = -1;
+
+			if (listView.SelectedItems.Count > 0)
+			{
+				selectedIndex = listView.SelectedItems[0].Index;
+			}
+
 			listView.Items.Clear();
 
 			todoContentLines = File.ReadAllLines(todoTxtPath);
@@ -311,6 +313,13 @@ namespace todoTxt
 				newRow.SubItems.Add(date);
 
 				lineNumber++;
+			}
+
+			// Reselecting the item.
+			if (selectedIndex >= 0)
+			{
+				listView.Items[selectedIndex].Selected = true;
+				listView.Select();
 			}
 		}
 
